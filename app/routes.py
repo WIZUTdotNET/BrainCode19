@@ -27,7 +27,7 @@ def mapview():
         identifier="view-side",
         lat=37.4419,
         lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
+        markers=[(37.4419, -122.1419)],
     )
     '''sndmap = Map(
         identifier="sndmap",
@@ -52,6 +52,7 @@ def mapview():
         identifier="catsmap",
         lat=37.4419,
         lng=-122.1419,
+        style="height:300px;width:500px;margin:0;",
         markers=[
             {
                 'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
@@ -73,4 +74,4 @@ def mapview():
             }
         ]
     )
-    return render_template('example.html', mymap=mymap, sndmap=sndmap)
+    return render_template('index.html', mymap=mymap, sndmap=sndmap)

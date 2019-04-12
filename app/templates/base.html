@@ -1,15 +1,16 @@
 {%- extends "bootstrap/base.html" %}
 
-{% block title %}
-    {% if title %}
-        {{ title }} - Microblog
-    {% else %}
-        Welcome to Microblog!
-    {% endif %}
+{% block scripts %}
+    {{"decoupled-map"|googlemap_js(37.4419, -122.1419, markers=[(37.4419, -122.1419)])}}
+    {{mymap.js}}
+    {{sndmap.js}}
+{{super()}}
 {% endblock %}
 
-{% block navbar %}
-    <div class="navbar navbar-fixed-top">
-        Feature: <a href="/index">Home</a>
-    </div>
+{% block title %}
+    {% if title %}
+        {{ title }} - BrainCode
+    {% else %}
+        Welcome to BrainCode!
+    {% endif %}
 {% endblock %}
