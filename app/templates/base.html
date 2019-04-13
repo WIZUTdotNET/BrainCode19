@@ -2,6 +2,8 @@
 
 {% block scripts %}
     <script>
+        var center_start = null
+
         var start = null
         var stop = null
 
@@ -11,29 +13,28 @@
         var directionsService = null
         var directionsDisplay = null
 
-        var directionsService1 = null
-        var directionsDisplay1 = null
-
         var global_stan = null
+
 
       function initMap() {
           directionsService = new google.maps.DirectionsService();
           directionsDisplay = new google.maps.DirectionsRenderer();
 
-          start = new google.maps.LatLng(37.7699298, -122.4469157);
-          stop = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-          start1 = new google.maps.LatLng(38.7699298, -121.4469157);
-          stop1 = new google.maps.LatLng(38.7683909618184, -121.51089453697205);
+          center_start = new google.maps.LatLng(52.227343, 21.007590);
 
           var mapOptions = {
-              zoom: 14,
-              center: start
+              zoom: 10,
+              center: center_start
           }
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
           directionsDisplay.setMap(map);
       }
 
       function calcRoute(stan) {
+          start = new google.maps.LatLng(52.227343, 21.007590);
+          stop = new google.maps.LatLng(52.407039, 16.917493);
+          start1 = new google.maps.LatLng(38.7699298, -121.4469157);
+          stop1 = new google.maps.LatLng(38.7683909618184, -121.51089453697205);
 
         var selectedMode = 'DRIVING';
         if (stan==0){
@@ -57,16 +58,20 @@
             };
         }
 
-
         directionsService.route(request, function(response, status) {
             if (status == 'OK') {
                 directionsDisplay.setDirections(response);
-
-                console.log(global_stan)
             }
-
         });
       }
+      function Show() {
+   var x = document.getElementById("Hiden");
+       if (x.style.display === "none") {
+           x.style.display = "block";
+       } else {
+           x.style.display = "none";
+       }
+   }
     </script>
 {{super()}}
 {% endblock %}
