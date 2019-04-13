@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 
 
 <div class="container">
@@ -9,10 +22,24 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-9 ">
-            {{sndmap.html}}
+        <div class="col-sm-9">
+            <div style="height: 200px" id="map"></div>
         </div>
     </div>
+    <button class="btn btn-danger" onclick="calcRoute(1)">
+        Click me!
+    </button>
+    <button class="btn btn-danger" onclick="calcRoute(0)">
+        Click me!
+    </button>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBub2kd5v_DR_W20MWmnhITUq0UWumjnQ&callback=initMap"
+    async defer></script>
+    <script>
+        window.onload = function(){
+            initMap();
+        }
+    </script>
 
     <div class="row bg-secondary">
         <div class="col-sm-9">

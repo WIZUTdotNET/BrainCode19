@@ -44,4 +44,4 @@ def mapview():
         markers=[(loc['lat'], loc['lng'], loc['infobox'], loc['icon']) for loc in locations],
         fit_markers_to_bounds=True
     )
-    return render_template('index.html', sndmap=sndmap)
+    return render_template('index.html', sndmap=sndmap, locations=locations)
