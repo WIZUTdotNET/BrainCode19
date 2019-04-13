@@ -5,7 +5,6 @@ from flask_googlemaps import Map
 import json
 import requests
 
-from app.direction import Route
 
 
 @app.route("/")
