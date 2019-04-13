@@ -9,13 +9,11 @@
 
         var map = null
 
-        var marker = null
-
       function initMap() {
           google.maps.visualRefresh = true;
 
           directionsService = new google.maps.DirectionsService();
-          directionsDisplay = new google.maps.DirectionsRenderer();
+          directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
           center_start = new google.maps.LatLng(52.227343, 21.007590);
 
@@ -29,14 +27,13 @@
 
       function calcRoute(stan) {
 
-          //var iconBase = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
-            var iconBase = 'static/images/';
+          var iconBase = 'static/images/';
           var icons = {
               start: {
-                icon: iconBase + 'start.jpg'
+                icon: iconBase + 'start.png'
               },
               end: {
-                  icon: iconBase + 'end.jpg'
+                  icon: iconBase + 'end.png'
               }
           };
         var features = [
@@ -55,7 +52,7 @@
           }
         ];
         for (var i = 0; i < features.length; i++) {
-          marker = new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: features[i].position,
             icon: icons[features[i].type].icon,
             map: map
@@ -93,21 +90,14 @@
             }
         });
       }
-      function makeMarker( position, icon, title ) {
-        new google.maps.Marker({
-            position: position,
-            map: map,
-            icon: icon,
-            title: title
-        });
-      }
+
       function Show() {
-   var x = document.getElementById("Hiden");
-       if (x.style.display === "none") {
+        var x = document.getElementById("Hiden");
+        if (x.style.display === "none") {
            x.style.display = "block";
-       } else {
+        } else {
            x.style.display = "none";
-       }
+        }
    }
     </script>
 {{super()}}
