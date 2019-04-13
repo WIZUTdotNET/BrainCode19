@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_googlemaps import GoogleMaps
-from flask_googlemaps import Map
 
 def create_app():
   app = Flask(__name__)

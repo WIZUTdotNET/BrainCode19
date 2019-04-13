@@ -2,76 +2,46 @@ from app import app
 from flask import render_template
 from flask_googlemaps import Map
 
-'''
-@app.route('/')
-@app.route('/index')
-def index():
-    user = {'username': 'Pawel'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home', user=user, posts=posts)
-'''
+import json
+import requests
+
+from app.direction import Route
+
 
 @app.route("/")
 def mapview():
-    # creating a map in the view
-    mymap = Map(
-        identifier="view-side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)],
-    )
-    '''sndmap = Map(
-        identifier="sndmap",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[
-          {
-             'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-             'lat': 37.4419,
-             'lng': -122.1419,
-             'infobox': "<b>Hello World</b>"
-          },
-          {
-             'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-             'lat': 37.4300,
-             'lng': -122.1400,
-             'infobox': "<b>Hello World from other place</b>"
-          }
-        ]
-    )'''
-    sndmap = Map(
-        identifier="catsmap",
-        lat=37.4419,
-        lng=-122.1419,
-        style="height:400px;width:500px;margin:0;",
-        markers=[
+    response = requests.get("https://raw.githubusercontent.com/mmcloughlin/starbucks/master/locations.json")
+    loc_from_json = json.loads(response.text)
+
+    icons = {
+        'green': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        'blue': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        'yellow': 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+    }
+
+    infobox_markup = "<img width='100px' height='100px' src='static/images/cat"
+
+    locations = []
+    for i in range(3):
+        locations.append(
             {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-                'lat': 37.4419,
-                'lng': -122.1419,
-                'infobox': "<img width='100px' height='100px' src='static/images/cat1.jpg' />"
-            },
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                'lat': 37.4300,
-                'lng': -122.1400,
-                'infobox': "<img width='100px' height='100px' src='static/images/cat2.jpg' />"
-            },
-            {
-                'icon': 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
-                'lat': 37.4500,
-                'lng': -122.1350,
-                'infobox': "<img width='100px' height='100px' src='static/images/cat3.jpg' />"
+                'icon': icons['green'],
+                'lat': loc_from_json[i]['latitude'],
+                'lng': loc_from_json[i]['longitude'],
+                'infobox': infobox_markup + str(i + 1) + ".jpg' />"
             }
-        ]
+        )
+
+    # creating a map in the view
+    #route = Route("app/static/20180117_023924.tcx.xml")
+
+    sndmap = Map(
+        #route.trackpoints,
+        identifier="catsmap",
+        lat=locations[0]['lat'],
+        lng=locations[0]['lng'],
+        style="height:400px;width:500px;margin:0;",
+        markers=[(loc['lat'], loc['lng'], loc['infobox'], loc['icon']) for loc in locations],
+        fit_markers_to_bounds=True
     )
-    return render_template('index.html', mymap=mymap, sndmap=sndmap)
+    return render_template('index.html', sndmap=sndmap)
