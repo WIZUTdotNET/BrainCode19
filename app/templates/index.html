@@ -1,8 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        {{sndmap.html}}
+
+
+<div class="container">
+    <div class="page-header bg-secondary">
+        <h3 class="text-muted">AllegroTech</h3>
     </div>
+
+    <div class="row">
+        <div class="col-sm-9 ">
+            {{sndmap.html}}
+        </div>
+    </div>
+
+    <div class="row bg-secondary">
+        <div class="col-sm-9">
+            <p>Twoja paczka będzie za: </p>
+            <p>Czas dostawy: </p>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Zamówienia</div>
+
+                    <ul class="list-group">
+                        <li class="list-group-item">Kubek biały x3 / 24.95zł </li>
+                        <li class="list-group-item">Klawiatura x1 / 42.73zł </li>
+                        <li class="list-group-item">Mikrofon x1 / 41.69zł </li>
+                    </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer align-middle">
+        <p>&copy; Liars 2019</p>
+    </footer>
+
+</div>
+
+
+
 
 {% endblock %}

@@ -52,7 +52,7 @@ def mapview():
         identifier="catsmap",
         lat=37.4419,
         lng=-122.1419,
-        style="height:300px;width:500px;margin:0;",
+        style="height:400px;width:500px;margin:0;",
         markers=[
             {
                 'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
