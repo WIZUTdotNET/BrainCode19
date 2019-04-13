@@ -70,6 +70,9 @@
         };
         document.getElementById('czas').innerText = "4 dni";
         document.getElementById('data').innerHTML = "17.04.2019r";
+        document.getElementById('nameOrder').innerText = "Kubek Allegro";
+        document.getElementById('priceOrder').innerText = "24.95 zł";
+        document.getElementById('numberOrder').innerText = "3";
         }
         if (stan==1) {
             var request = {
@@ -82,6 +85,10 @@
             };
         document.getElementById('czas').innerText = "2 dni";
         document.getElementById('data').innerHTML = "15.04.2019r";
+        document.getElementById('nameOrder').innerText = "Młynek do kawy";
+        document.getElementById('priceOrder').innerText = "42.73 zł";
+        document.getElementById('numberOrder').innerText = "1";
+
         }
 
         directionsService.route(request, function(response, status) {
