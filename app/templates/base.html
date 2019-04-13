@@ -11,9 +11,14 @@
 
       function initMap() {
           google.maps.visualRefresh = true;
-
           directionsService = new google.maps.DirectionsService();
-          directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
+          directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true,
+          polylineOptions: {
+              strokeColor: '#880000',
+              strokeOpacity: 1.0,
+              strokeWeight: 4
+          },
+        });
 
           center_start = new google.maps.LatLng(52.227343, 21.007590);
 
@@ -44,22 +49,23 @@
             position: new google.maps.LatLng(52.407039, 16.917493),
             type: 'end'
           }, {
-            position: new google.maps.LatLng(-33.91747, 151.22912),
+            position: new google.maps.LatLng(52.521288, 13.398712),
             type: 'start'
           }, {
-            position: new google.maps.LatLng(-33.91910, 151.22907),
+            position: new google.maps.LatLng(53.429190, 14.545651),
             type: 'end'
           }
         ];
-        for (var i = 0; i < features.length; i++) {
-          var marker = new google.maps.Marker({
+
+        var selectedMode = 'DRIVING';
+        if (stan==0){
+            for (var i = 0; i < features.length; i++) {
+            var marker = new google.maps.Marker({
             position: features[i].position,
             icon: icons[features[i].type].icon,
             map: map
-          });
-        };
-        var selectedMode = 'DRIVING';
-        if (stan==0){
+            });
+            };
             var request = {
             origin: features[0].position,
             destination: features[1].position,
@@ -74,7 +80,15 @@
         document.getElementById('priceOrder').innerText = "24.95 zł";
         document.getElementById('numberOrder').innerText = "3";
         }
+
         if (stan==1) {
+            for (var i = 0; i < features.length; i++) {
+                var marker = new google.maps.Marker({
+                    position: features[i].position,
+                    icon: icons[features[i].type].icon,
+                    map: map
+                });
+            };
             var request = {
                 origin: features[2].position,
                 destination: features[3].position,
