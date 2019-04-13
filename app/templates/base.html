@@ -58,6 +58,8 @@
         ];
 
         var selectedMode = 'DRIVING';
+        var value = document.getElementById('progress_bar');
+
         if (stan==0){
             for (var i = 0; i < features.length; i++) {
             var marker = new google.maps.Marker({
@@ -79,6 +81,10 @@
         document.getElementById('nameOrder').innerText = "Kubek Allegro";
         document.getElementById('priceOrder').innerText = "24.95 zł";
         document.getElementById('numberOrder').innerText = "3";
+
+        var newprogress = '50%';
+        value.innerHTML = newprogress;
+        $('#progress_bar').attr('aria-valuenow', newprogress).css('width', newprogress);
         }
 
         if (stan==1) {
@@ -103,6 +109,9 @@
         document.getElementById('priceOrder').innerText = "42.73 zł";
         document.getElementById('numberOrder').innerText = "1";
 
+        var newprogress = '83%';
+        value.innerHTML = newprogress;
+        $('#progress_bar').attr('aria-valuenow', newprogress).css('width', newprogress);
         }
 
         directionsService.route(request, function(response, status) {
