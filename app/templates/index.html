@@ -12,54 +12,58 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        background-image: url(../static/images/background2.png);
+        background-size: cover;
       }
     </style>
 
 
-<div class="container">
-    <div class="page-header bg-secondary">
-        <h3 class="text-muted">AllegroTech</h3>
-    </div>
-
+<div class="container" style="background-color: rgba(255,239,218,0.7);">
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-10 col-sm-offset-1">
+            <img src="../static/images/logo3.png" class="img-responsive" alt="Responsive image" style="max-width: 100%; height: auto;">
+        </div>
+
+
+
+        <div class="col-sm-10 col-sm-offset-1">
             <div style="height: 200px" id="map"></div>
         </div>
-    </div>
-    <button class="btn btn-danger" onclick="calcRoute(0)">
-        Click me!
-    </button>
-    <button class="btn btn-danger" onclick="calcRoute(1)">
-        Click me!
-    </button>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBub2kd5v_DR_W20MWmnhITUq0UWumjnQ&callback=initMap"
-    async defer></script>
-    <script>
-        window.onload = function(){
-            initMap();
-        }
-    </script>
+        <div class="col-sm-10  col-sm-offset-1">
+            <button class="btn btn-danger" onclick="calcRoute(0)">
+                Kubek
+            </button>
+            <button class="btn btn-danger" onclick="calcRoute(1)">
+                Młynek do kawy
+            </button>
 
-    <div class="row bg-secondary">
-        <div class="col-sm-9">
-            <p>Twoja paczka będzie za: </p>
-            <p>Czas dostawy: </p>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBub2kd5v_DR_W20MWmnhITUq0UWumjnQ&callback=initMap"
+            async defer></script>
+            <script>
+                window.onload = function(){
+                    initMap();
+                }
+            </script>
+
+
+            <hr style=" height: 4px; margin-left: 15px; margin-bottom:-3px; background-image: -webkit-linear-gradient(left, rgba(210,105,30,.8), rgba(210,105,30,.6), rgba(0,0,0,0));">
+            <h3><span class="glyphicon glyphicon-gift"></span> Twoja paczka będzie za: </h3>
+            <h3><span class="glyphicon glyphicon-hourglass"></span> Czas dostawy: </h3>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Zamówienia</div>
+                <div class="panel-heading" style="background-color: #FAD096">Zamówienia</div>
 
                     <ul class="list-group">
-                        <li class="list-group-item">Kubek biały x3 / 24.95zł </li>
-                        <li class="list-group-item">Klawiatura x1 / 42.73zł </li>
-                        <li class="list-group-item">Mikrofon x1 / 41.69zł </li>
+                        <li class="list-group-item" style="background-color: #FDF8F1">Kubek biały x3 / 24.95zł </li>
+                        <li class="list-group-item" style="background-color: #FDF8F1">Młynek do kawy x1 / 42.73zł </li>
                     </ul>
 
-            </div>
+             </div>
         </div>
     </div>
 
-    <footer class="footer align-middle">
+    <footer class="footer align-middle col-sm-offset-1" style="text-align:center;">
         <p>&copy; Liars 2019</p>
     </footer>
 
