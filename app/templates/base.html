@@ -4,19 +4,16 @@
     <script>
         var center_start = null
 
-        var start = null
-        var stop = null
-
-        var start1 = null
-        var stop1 = null
-
         var directionsService = null
         var directionsDisplay = null
 
-        var global_stan = null
+        var map = null
 
+        var marker = null
 
       function initMap() {
+          google.maps.visualRefresh = true;
+
           directionsService = new google.maps.DirectionsService();
           directionsDisplay = new google.maps.DirectionsRenderer();
 
@@ -26,42 +23,82 @@
               zoom: 10,
               center: center_start
           }
-          var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+          map = new google.maps.Map(document.getElementById('map'), mapOptions);
           directionsDisplay.setMap(map);
       }
 
       function calcRoute(stan) {
-          start = new google.maps.LatLng(52.227343, 21.007590);
-          stop = new google.maps.LatLng(52.407039, 16.917493);
-          start1 = new google.maps.LatLng(38.7699298, -121.4469157);
-          stop1 = new google.maps.LatLng(38.7683909618184, -121.51089453697205);
 
+          //var iconBase = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/';
+            var iconBase = 'static/images/';
+          var icons = {
+              start: {
+                icon: iconBase + 'start.jpg'
+              },
+              end: {
+                  icon: iconBase + 'end.jpg'
+              }
+          };
+        var features = [
+          {
+            position: new google.maps.LatLng(52.227343, 21.007590),
+            type: 'start'
+          }, {
+            position: new google.maps.LatLng(52.407039, 16.917493),
+            type: 'end'
+          }, {
+            position: new google.maps.LatLng(-33.91747, 151.22912),
+            type: 'start'
+          }, {
+            position: new google.maps.LatLng(-33.91910, 151.22907),
+            type: 'end'
+          }
+        ];
+        for (var i = 0; i < features.length; i++) {
+          marker = new google.maps.Marker({
+            position: features[i].position,
+            icon: icons[features[i].type].icon,
+            map: map
+          });
+        };
         var selectedMode = 'DRIVING';
         if (stan==0){
             var request = {
-            origin: start,
-            destination: stop,
+            origin: features[0].position,
+            destination: features[1].position,
             // Note that Javascript allows us to access the constant
             // using square brackets and a string value as its
             // "property."
             travelMode: google.maps.TravelMode[selectedMode]
         };
+        document.getElementById('czas').innerText = "4 dni";
+        document.getElementById('data').innerHTML = "17.04.2019r";
         }
-        if (stan==1){
+        if (stan==1) {
             var request = {
-                origin: start1,
-                destination: stop1,
+                origin: features[2].position,
+                destination: features[3].position,
                 // Note that Javascript allows us to access the constant
                 // using square brackets and a string value as its
                 // "property."
                 travelMode: google.maps.TravelMode[selectedMode]
             };
+        document.getElementById('czas').innerText = "2 dni";
+        document.getElementById('data').innerHTML = "15.04.2019r";
         }
 
         directionsService.route(request, function(response, status) {
             if (status == 'OK') {
                 directionsDisplay.setDirections(response);
             }
+        });
+      }
+      function makeMarker( position, icon, title ) {
+        new google.maps.Marker({
+            position: position,
+            map: map,
+            icon: icon,
+            title: title
         });
       }
       function Show() {
