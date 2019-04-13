@@ -6,7 +6,6 @@ import json
 import requests
 
 
-
 @app.route("/")
 def mapview():
     response = requests.get("https://raw.githubusercontent.com/mmcloughlin/starbucks/master/locations.json")

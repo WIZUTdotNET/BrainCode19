@@ -2,27 +2,29 @@
 
 {% block scripts %}
     <script>
+        var start = null
+        var stop = null
 
-    google.maps.visualRefresh = true;
+        var start1 = null
+        var stop1 = null
 
-    var start = null
-      var stop = null
-    var start1 = null
-      var stop1 = null
         var directionsService = null
         var directionsDisplay = null
-    var directionsService1 = null
+
+        var directionsService1 = null
         var directionsDisplay1 = null
+
+        var global_stan = null
 
       function initMap() {
           directionsService = new google.maps.DirectionsService();
           directionsDisplay = new google.maps.DirectionsRenderer();
-          directionsService1 = new google.maps.DirectionsService();
-          directionsDisplay1 = new google.maps.DirectionsRenderer();
+
           start = new google.maps.LatLng(37.7699298, -122.4469157);
           stop = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-          start1 = new google.maps.LatLng(37.7699298, -122.4469157);
-          stop1 = new google.maps.LatLng(36.7683909618184, -123.51089453697205);
+          start1 = new google.maps.LatLng(38.7699298, -121.4469157);
+          stop1 = new google.maps.LatLng(38.7683909618184, -121.51089453697205);
+
           var mapOptions = {
               zoom: 14,
               center: start
@@ -30,41 +32,41 @@
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
           directionsDisplay.setMap(map);
       }
-        function calcRoute(stan) {
-            if (stan == 0) {
-                var selectedMode = 'DRIVING';
-                var request = {
-                  origin: start,
-                  destination: stop,
-                  // Note that Javascript allows us to access the constant
-                  // using square brackets and a string value as its
-                  // "property."
-                  travelMode: google.maps.TravelMode[selectedMode]
-                };
-                directionsService.route(request, function(response, status) {
-                    if (status == 'OK') {
-                        directionsDisplay.setDirections(response);
-                    }
-                });
-                }
 
-            if (stan == 1) {
-                var selectedMode = 'DRIVING';
-                var request = {
-                    origin: start1,
-                    destination: stop1,
-                    // Note that Javascript allows us to access the constant
-                    // using square brackets and a string value as its
-                    // "property."
-                    travelMode: google.maps.TravelMode[selectedMode]
-                };
-                directionsService1.route(request, function (response, status) {
-                    if (status == 'OK') {
-                        directionsDisplay1.setDirections(response);
-                    }
-                });
+      function calcRoute(stan) {
+
+        var selectedMode = 'DRIVING';
+        if (stan==0){
+            var request = {
+            origin: start,
+            destination: stop,
+            // Note that Javascript allows us to access the constant
+            // using square brackets and a string value as its
+            // "property."
+            travelMode: google.maps.TravelMode[selectedMode]
+        };
+        }
+        if (stan==1){
+            var request = {
+                origin: start1,
+                destination: stop1,
+                // Note that Javascript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode[selectedMode]
+            };
+        }
+
+
+        directionsService.route(request, function(response, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(response);
+
+                console.log(global_stan)
             }
-    }
+
+        });
+      }
     </script>
 {{super()}}
 {% endblock %}
